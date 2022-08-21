@@ -3,6 +3,7 @@ const app = express();
 
 const dotenv = require('dotenv');
 const userRoutes = require('./routes/userRoutes');
+const bookRoutes = require('./routes/bookRoutes');
 
 dotenv.config({ path: './config/config.env' });
 
@@ -11,6 +12,7 @@ connectDB();
 
 app.use(express.json());
 app.use('/api/v1/users', userRoutes);
+app.use('/api/v1/books', bookRoutes);
 
 app.get('/', (req, res) => {
   res.send('Hello World');
