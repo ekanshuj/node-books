@@ -6,8 +6,9 @@ const { createToken } = require('../middleware/authJWT');
 
 class userController {
   static showUsers = asyncHandler(async (req, res) => {
+    const { id } = req.params.id;
     try {
-      const user = await User.find({ _id: { $ne: req.params.id } }).select(["name", "email"]);
+      const user = await User.find({ _id: { $ne: id } }).select(["name", "email"]);
       (user) ? res.status(201).json({ user, status: true }) : res.status(401).json({ message: "No such User found" })
     } catch (er) {
       return res.status(501).json({ message: "Something Went Wrong", error: er });
